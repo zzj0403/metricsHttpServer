@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-http-server
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: metrics-http-server
+  template:
+    metadata:
+      labels:
+        app: metrics-http-server
+    spec:
+      imagePullSecrets:
+      - name: harbor-secret
+      containers:
+      - name: metrics-http-server
+        image: harbor.mthdoctor.com/app/metrics-http-server:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+
