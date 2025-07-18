@@ -1,0 +1,12 @@
+# 运行阶段指定scratch作为基础镜像
+FROM scratch
+
+WORKDIR /app
+
+# 将上一个阶段publish文件夹下的所有文件复制进来
+COPY metricsHttpServer /app/metricsHttpServer .
+
+
+EXPOSE 3000
+
+ENTRYPOINT ["./metricsHttpServer"]
